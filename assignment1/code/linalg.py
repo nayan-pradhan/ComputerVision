@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def dot_product(a, b):
     """Implement dot product between the two vectors: a and b.
 
@@ -17,7 +16,21 @@ def dot_product(a, b):
 
     out = None
     ### YOUR CODE HERE
+
+    # # Check whether dot product is possible or not
+    # a_col = a.shape[1]
+    # b_row = b.shape[0]
+
+    # if (a_col == b_row):
+    #     b = b.T # Transverse
+    # else:
+    #     return -1 # if a_col != b_row
+    # # Compute dot product
+    # out = sum(sum([i*j for (i, j) in zip(a, b)]))
+
+    out = np.dot(a, b)
     pass
+
     ### END YOUR CODE
     return out
 
@@ -38,11 +51,23 @@ def complicated_matrix_function(M, a, b):
     """
     out = None
     ### YOUR CODE HERE
+
+    temp1 = dot_product(a,b)
+    temp2 = my_multiplication(M, a.T)
+    temp3 = temp1 * temp2.T
+    out = temp3.T
+    
     pass
     ### END YOUR CODE
 
     return out
 
+def my_multiplication(a,b):
+    res = np.array()
+    for r in range(a.shape[1]):
+        for c in range(b.shape[0]):
+            res[r][c] = dot_product(a[r,:], b[:,c])
+    return res
 
 def svd(M):
     """Implement Singular Value Decomposition.
