@@ -17,7 +17,6 @@ def dot_product(a, b):
     out = None
     ## YOUR CODE HERE
 
-    # Check whether dot product is possible or not
     a_row = a.shape[0]
     a_col = a.shape[1]
     b_row = b.shape[0]
@@ -25,16 +24,19 @@ def dot_product(a, b):
 
     if (a_col == b_row):
         out = np.dot(a,b)
+        return out
 
-    elif(a_row == b_row):
+    elif (a_row == b_row):
         if (a_row == 1):
             out = np.dot(a, b.T)
+            return out
         else:
             out = np.dot(a.T, b)
+            return out
 
     else:
-        return -1
-        
+        out = np.dot(a, b)
+
     pass
 
     ### END YOUR CODE
@@ -55,10 +57,14 @@ def complicated_matrix_function(M, a, b):
         out: numpy matrix of shape (x, 1).
     """
     out = None
+
     ### YOUR CODE HERE  
-    temp1 = dot_product(a, b)
-    temp2 = dot_product(M, a)
-    out = dot_product(temp1, temp2)
+
+    temp1 = None
+    temp2 = None
+    temp1 = dot_product(a.T, b)
+    temp2 = dot_product(M, a.T)
+    out = dot_product(temp2, temp1)
     
     pass
     ### END YOUR CODE
