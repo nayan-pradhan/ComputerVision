@@ -1,3 +1,4 @@
+
 import numpy as np
 
 def dot_product(a, b):
@@ -13,27 +14,31 @@ def dot_product(a, b):
     Returns:
         out: numpy array of shape (x, x) (scalar if x = 1)
     """
-
     out = None
-    ### YOUR CODE HERE
+    ## YOUR CODE HERE
 
-    # # Check whether dot product is possible or not
-    # a_col = a.shape[1]
-    # b_row = b.shape[0]
+    # Check whether dot product is possible or not
+    a_row = a.shape[0]
+    a_col = a.shape[1]
+    b_row = b.shape[0]
+    b_col = b.shape[1]
 
-    # if (a_col == b_row):
-    #     b = b.T # Transverse
-    # else:
-    #     return -1 # if a_col != b_row
-    # # Compute dot product
-    # out = sum(sum([i*j for (i, j) in zip(a, b)]))
+    if (a_col == b_row):
+        out = np.dot(a,b)
 
-    out = np.dot(a, b)
+    elif(a_row == b_row):
+        if (a_row == 1):
+            out = np.dot(a, b.T)
+        else:
+            out = np.dot(a.T, b)
+
+    else:
+        return -1
+        
     pass
 
     ### END YOUR CODE
     return out
-
 
 def complicated_matrix_function(M, a, b):
     """Implement (a * b) * (M * a.T).
@@ -50,24 +55,15 @@ def complicated_matrix_function(M, a, b):
         out: numpy matrix of shape (x, 1).
     """
     out = None
-    ### YOUR CODE HERE
-
-    temp1 = dot_product(a,b)
-    temp2 = my_multiplication(M, a.T)
-    temp3 = temp1 * temp2.T
-    out = temp3.T
+    ### YOUR CODE HERE  
+    temp1 = dot_product(a, b)
+    temp2 = dot_product(M, a)
+    out = dot_product(temp1, temp2)
     
     pass
     ### END YOUR CODE
 
     return out
-
-def my_multiplication(a,b):
-    res = np.array()
-    for r in range(a.shape[1]):
-        for c in range(b.shape[0]):
-            res[r][c] = dot_product(a[r,:], b[:,c])
-    return res
 
 def svd(M):
     """Implement Singular Value Decomposition.
