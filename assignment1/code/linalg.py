@@ -15,27 +15,10 @@ def dot_product(a, b):
         out: numpy array of shape (x, x) (scalar if x = 1)
     """
     out = None
+
     ## YOUR CODE HERE
 
-    a_row = a.shape[0]
-    a_col = a.shape[1]
-    b_row = b.shape[0]
-    b_col = b.shape[1]
-
-    if (a_col == b_row):
-        out = np.dot(a,b)
-        return out
-
-    elif (a_row == b_row):
-        if (a_row == 1):
-            out = np.dot(a, b.T)
-            return out
-        else:
-            out = np.dot(a.T, b)
-            return out
-
-    else:
-        out = np.dot(a, b)
+    out = np.dot(a,b)
 
     pass
 
@@ -62,7 +45,7 @@ def complicated_matrix_function(M, a, b):
 
     temp1 = None
     temp2 = None
-    temp1 = dot_product(a.T, b)
+    temp1 = dot_product(a, b)
     temp2 = dot_product(M, a.T)
     out = dot_product(temp2, temp1)
     
@@ -89,6 +72,9 @@ def svd(M):
     s = None
     v = None
     ### YOUR CODE HERE
+
+    u, s, v = np.linalg.svd(M)
+
     pass
     ### END YOUR CODE
 
@@ -110,6 +96,13 @@ def get_singular_values(M, k):
     """
     singular_values = None
     ### YOUR CODE HERE
+    
+    u, s, v = svd(M)
+    # print('u= {}\n'.format(u))
+    # print("s= {}\n".format(s))
+    # print("v= {}\n".format(v))
+    singular_values = s[:k]
+
     pass
     ### END YOUR CODE
     return singular_values
