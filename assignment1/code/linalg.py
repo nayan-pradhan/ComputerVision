@@ -123,6 +123,7 @@ def eigen_decomp(M):
     w = None
     v = None
     ### YOUR CODE HERE
+    w, v = np.linalg.eig(M)
     pass
     ### END YOUR CODE
     return w, v
@@ -148,6 +149,16 @@ def get_eigen_values_and_vectors(M, k):
     eigenvalues = []
     eigenvectors = []
     ### YOUR CODE HERE
+    w, v = eigen_decomp(M)
+
+    topK_value = w.argsort()[::-1] # position of eigenvalue with the top absolute value
+    eigenvalues = w[topK_value] # value at postion determined above
+    eigenvalues = eigenvalues[:k] # first k eignevalues 
+
+    topK_vector = v.argsort()[::-1] # position of eigenvector with top absolute value
+    eigenvectors = v[topK_vector] # value at position determined above
+    eigenvectors = eigenvectors[:k] # first k eigenvectors
+
     pass
     ### END YOUR CODE
     return eigenvalues, eigenvectors
