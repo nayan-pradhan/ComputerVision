@@ -20,6 +20,7 @@ def load(image_path):
 
     ### YOUR CODE HERE
     # Use skimage io.imread
+    out = io.imread(image_path) # using io.imread() function
     pass
     ### END YOUR CODE
 
@@ -45,6 +46,7 @@ def dim_image(image):
     out = None
 
     ### YOUR CODE HERE
+    out = 0.5 * (image**2) # making the image dimmer
     pass
     ### END YOUR CODE
 
@@ -66,6 +68,7 @@ def convert_to_grey_scale(image):
     out = None
 
     ### YOUR CODE HERE
+    out = color.rgb2gray(image)
     pass
     ### END YOUR CODE
 
