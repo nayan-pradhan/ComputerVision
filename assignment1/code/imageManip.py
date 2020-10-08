@@ -184,6 +184,11 @@ def mix_images(image1, image2, channel1, channel2):
     image1_copy = rgb_exclusion(image1, channel1)
     image2_copy = rgb_exclusion(image2, channel2)
     out = np.concatenate((image1_copy[:,:image2_copy.shape[1]//2], image2_copy[:,image2_copy.shape[1]//2:]), axis = 1)
+    # using np.concatenate to concatinate two images
+    # image.shape[0] : no of columns
+    # image.shape[1] : no of rows
+    # we divide using // so that we get an integer value
+    # axis = 1 : acts on all columns in each row
     pass
     ### END YOUR CODE
 
@@ -213,7 +218,59 @@ def mix_quadrants(image):
     out = None
 
     ### YOUR CODE HERE
+    top_left = rgb_exclusion(image, 'R') 
+    top_right = dim_image(image)
+    # bottom_left = brighten_image(image) # made an additional function
+    bottom_left = image**0.5
+    bottom_right = rgb_exclusion(image, 'R')
+
+    # made slices according to question
+    n_tl = top_left[:top_left.shape[0]//2, :top_left.shape[1]//2]
+    n_tr = top_right[:top_right.shape[0]//2, top_right.shape[1]//2:]
+    n_bl = bottom_left[bottom_left.shape[0]//2:, :bottom_left.shape[1]//2]
+    n_br = bottom_right[bottom_right.shape[0]//2:, bottom_right.shape[1]//2:]
+    # using np.concatenate to concatinate two images
+    # image.shape[0] : no of columns
+    # image.shape[1] : no of rows
+    # we divide using // so that we get an integer value
+
+    # I implemented two ways of performing the final concatination:
+    
+    # 1.
+    top = np.concatenate((n_tl, n_tr), axis = 1)
+    bottom = np.concatenate((n_bl, n_br), axis = 1)
+    out = np.concatenate((top, bottom), axis = 0)
+    
+    # 2.
+    # left = np.concatenate((n_tl, n_bl), axis = 0)
+    # right = np.concatenate((n_tr, n_br), axis = 0)
+    # out = np.concatenate((left, right), axis = 1)
+
+    # axis = 1 : acts on all columns in each row
+    # axis = 0 : acts on all rows in each column
+
     pass
     ### END YOUR CODE
 
     return out
+
+# # custom function to make image brighter for mix_quadrants function
+# def brighten_image(image):
+#     """Change the value of every pixel by following
+
+#                         x_n = x_p^0.5
+
+#     where x_n is the new value and x_p is the original value.
+
+#     Args:
+#         image: numpy array of shape(image_height, image_width, 3).
+
+#     Returns:
+#         out: numpy array of shape(image_height, image_width, 3).
+#     """
+
+#     out = None
+
+#     out = image**0.5 # making the image brighter
+#     pass
+#     return out
