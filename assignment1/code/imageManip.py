@@ -68,7 +68,7 @@ def convert_to_grey_scale(image):
     out = None
 
     ### YOUR CODE HERE
-    out = color.rgb2gray(image)
+    out = color.rgb2gray(image) # converting rgb to grey
     pass
     ### END YOUR CODE
 
@@ -89,6 +89,14 @@ def rgb_exclusion(image, channel):
     out = None
 
     ### YOUR CODE HERE
+    out = image.copy() # need copy of image to manipulate it
+    # 3rd attribute of image represents R,G,B value as 0,1,2 respectively
+    if (channel == 'R'):
+        out[:,:,0] = 0 # red color is removed 
+    elif (channel == 'G'):
+        out[:,:,1] == 0 # green color is removed
+    elif (channel == 'B'):
+        out[:,:,2] = 0 # blue color is removed
     pass
     ### END YOUR CODE
 
@@ -110,6 +118,14 @@ def lab_decomposition(image, channel):
     out = None
 
     ### YOUR CODE HERE
+    out = lab.copy() # need copy of image to manipulate it
+
+    if (channel == 'L'):
+        out = lab[:,:,0] # only L
+    elif (channel == 'A'):
+        out = lab[:,:,1] # only A
+    elif (channel == 'B'):
+        out = lab[:,:,2] # only B
     pass
     ### END YOUR CODE
 
@@ -131,6 +147,14 @@ def hsv_decomposition(image, channel='H'):
     out = None
 
     ### YOUR CODE HERE
+    out = hsv.copy() # need copy of image to manipulate it
+
+    if (channel == 'H'):
+        out = hsv[:,:,0] # only H
+    elif (channel == 'S'):
+        out = hsv[:,:,1] # only S
+    elif (channel == 'V'):
+        out = hsv[:,:,2] # only V
     pass
     ### END YOUR CODE
 
