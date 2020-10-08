@@ -181,6 +181,9 @@ def mix_images(image1, image2, channel1, channel2):
 
     out = None
     ### YOUR CODE HERE
+    image1_copy = rgb_exclusion(image1, 'R')
+    image2_copy = rgb_exclusion(image2, 'G')
+    out = np.concatenate((image1_copy[:,:image2_copy.shape[1]//2], image2_copy[:,image2_copy.shape[1]//2:]), axis = 1)
     pass
     ### END YOUR CODE
 
