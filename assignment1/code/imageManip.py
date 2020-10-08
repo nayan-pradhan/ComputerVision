@@ -94,7 +94,7 @@ def rgb_exclusion(image, channel):
     if (channel == 'R'):
         out[:,:,0] = 0 # red color is removed 
     elif (channel == 'G'):
-        out[:,:,1] == 0 # green color is removed
+        out[:,:,1] = 0 # green color is removed
     elif (channel == 'B'):
         out[:,:,2] = 0 # blue color is removed
     pass
@@ -181,8 +181,8 @@ def mix_images(image1, image2, channel1, channel2):
 
     out = None
     ### YOUR CODE HERE
-    image1_copy = rgb_exclusion(image1, 'R')
-    image2_copy = rgb_exclusion(image2, 'G')
+    image1_copy = rgb_exclusion(image1, channel1)
+    image2_copy = rgb_exclusion(image2, channel2)
     out = np.concatenate((image1_copy[:,:image2_copy.shape[1]//2], image2_copy[:,image2_copy.shape[1]//2:]), axis = 1)
     pass
     ### END YOUR CODE
