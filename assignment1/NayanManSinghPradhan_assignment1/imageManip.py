@@ -1,3 +1,5 @@
+# Submitted By: Nayan Man Singh Pradhan
+
 import math
 
 import numpy as np
