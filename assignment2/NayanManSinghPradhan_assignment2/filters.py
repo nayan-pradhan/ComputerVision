@@ -18,8 +18,22 @@ def conv_nested(image, kernel):
     Hi, Wi = image.shape
     Hk, Wk = kernel.shape
     out = np.zeros((Hi, Wi))
-
     ### YOUR CODE HERE
+
+    # First, we need to address the edge of the image
+    # I will use zero padding for solving this
+
+    # First make a zero matrix with extra dimentions
+    padded_img = np.zeros((Hi+Hk-1, Wi+Wk-1)) 
+    # Then add your original image into the padded image
+    padded_img[:-Hk//2,:-Wk//2] = image 
+
+    for l in range(Hi):
+        for b in range(Wi):
+            for i in range(Hk):
+                for j in range(Wk):
+                    out[l,b] += padded_img[l-i+1, b-j+1] * kernel[i,j] 
+
     pass
     ### END YOUR CODE
 
