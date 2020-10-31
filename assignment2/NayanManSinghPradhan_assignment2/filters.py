@@ -91,6 +91,7 @@ def conv_fast(image, kernel):
     out = np.zeros((Hi, Wi))
 
     ### YOUR CODE HERE
+    
     pass
     ### END YOUR CODE
 
