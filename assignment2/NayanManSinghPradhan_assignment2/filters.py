@@ -61,6 +61,7 @@ def zero_pad(image, pad_height, pad_width):
     out = None
 
     ### YOUR CODE HERE
+    out = np.pad(image, ((pad_height, pad_height),(pad_width, pad_width)), 'constant', constant_values = 0)
     pass
     ### END YOUR CODE
     return out
