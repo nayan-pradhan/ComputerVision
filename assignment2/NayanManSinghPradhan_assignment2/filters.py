@@ -91,6 +91,17 @@ def conv_fast(image, kernel):
     out = np.zeros((Hi, Wi))
 
     ### YOUR CODE HERE
+
+    # First, start by flipping the kernel (for convolution)
+    flipped_ker = np.fliplr(kernel)
+
+    # Initializing some variables
+    i = Hk//2
+    j = Wk//2
+
+    # Zero padding
+    padded_img = zero_pad(image, i, j)
+    out = np.copy(padded_img)
     
     pass
     ### END YOUR CODE
