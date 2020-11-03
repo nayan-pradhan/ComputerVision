@@ -101,7 +101,7 @@ def conv_fast(image, kernel):
 
     # Zero padding
     padded_img = zero_pad(image, i, j)
-    out = np.copy(padded_img)
+    out = np.copy(out)
     
     # run the loop
     for m in range (i, i + Hi):
