@@ -103,6 +103,12 @@ def conv_fast(image, kernel):
     padded_img = zero_pad(image, i, j)
     out = np.copy(padded_img)
     
+    # run the loop
+    for m in range (i, i + Hi):
+        for n in range (j, j + Wi):
+            temp_box = padded_img[m-i:m+i+1, n-j:n+j+1]
+            out[m-i, n-j] = (temp_box * flipped_ker).sum()
+
     pass
     ### END YOUR CODE
 
