@@ -101,6 +101,8 @@ def conv_fast(image, kernel):
 
     # Zero padding
     padded_img = zero_pad(image, i, j)
+
+    # Making changes on copy of image
     out = np.copy(out)
     
     # run the loop
@@ -148,6 +150,27 @@ def cross_correlation(f, g):
 
     out = None
     ### YOUR CODE HERE
+    Hi, Wi = f.shape # For larger image
+    Hk, Wk = g.shape # For item we need to search for
+
+    # Since this is correlation, we dont need to flip kernel/g
+
+    # Initializing some variables
+    i = Hk//2
+    j = Wk//2
+
+    # Add padding to image
+    padded_img = zero_pad(f, i, j)
+
+    # Making changes in copy of image
+    out = np.copy(f)
+
+    # Looping
+    for m in range(i, Hi + i):
+        for n in range(j, Wi + j):
+            temp_box = padded_img[m-i:m+i, n-j:n+j+1]
+            out[m-i, n-j] = (temp_box * g).sum()
+
     pass
     ### END YOUR CODE
 
