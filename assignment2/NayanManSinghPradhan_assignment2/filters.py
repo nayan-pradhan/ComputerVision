@@ -153,7 +153,7 @@ def cross_correlation(f, g):
     Hi, Wi = f.shape # For larger image
     Hk, Wk = g.shape # For item we need to search for
 
-    # Since this is correlation, we dont need to flip kernel/g
+    # Since this is correlation, we dont need to flip kernel ie. g
 
     # Initializing some variables
     i = Hk//2
