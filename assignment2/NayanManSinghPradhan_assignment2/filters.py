@@ -193,6 +193,9 @@ def zero_mean_cross_correlation(f, g):
 
     out = None
     ### YOUR CODE HERE
+    mean_g = np.mean(g)
+    new_g = g - mean_g
+    out = cross_correlation(f, new_g)
     pass
     ### END YOUR CODE
 
