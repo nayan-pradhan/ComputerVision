@@ -25,7 +25,7 @@ def conv_nested(image, kernel):
 
     # First make a zero matrix with extra dimentions
     padded_img = np.zeros((Hi+Hk-1, Wi+Wk-1)) 
-    # Then add your original image into the padded image
+
     padded_img[:-Hk//2,:-Wk//2] = image 
 
     for l in range(Hi):
@@ -220,6 +220,9 @@ def normalized_cross_correlation(f, g):
 
     out = None
     ### YOUR CODE HERE
+
+    
+
     pass
     ### END YOUR CODE
 
