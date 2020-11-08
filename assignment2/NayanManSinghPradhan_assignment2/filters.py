@@ -1,5 +1,8 @@
-import numpy as np
+# Done and Submitted by: Nayan Man Singh Pradhan
 
+import numpy as np
+from scipy import signal
+from scipy import misc
 
 def conv_nested(image, kernel):
     """A naive implementation of convolution filter.
@@ -131,6 +134,7 @@ def conv_faster(image, kernel):
     out = np.zeros((Hi, Wi))
 
     ### YOUR CODE HERE
+    out = signal.convolve2d(image, kernel, boundary='fill', mode = 'same')
     pass
     ### END YOUR CODE
 
