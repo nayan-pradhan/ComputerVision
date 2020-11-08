@@ -219,11 +219,25 @@ def normalized_cross_correlation(f, g):
         out: numpy array of shape (Hf, Wf).
     """
 
-    
-
     out = None
     ### YOUR CODE HERE
+    
+    # dimension of image and kernel
+    Hi, Wi = f.shape
+    Hk, Wk = g.shape
 
+    # Initializing some variabels
+    i = Hk//2
+    j = Wk//2
+
+    # Padding original image
+    padded_img = zero_pad(f, i, j)
+
+    # Making copy of image to work on
+    out = np.copy(f)
+
+    for m in range (i, Hi+1):
+        for n in range (j, Hj+1)
     
 
     pass
