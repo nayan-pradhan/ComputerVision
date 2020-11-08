@@ -236,9 +236,14 @@ def normalized_cross_correlation(f, g):
     # Making copy of image to work on
     out = np.copy(f)
 
-    for m in range (i, Hi+1):
-        for n in range (j, Hj+1)
-    
+    for m in range (i, Hi+i):
+        for n in range (j, Wi+j):
+            temp = padded_img[m-i:m+i, n-j:n+j+1]
+            temp = (temp - np.mean(temp)) * (1/np.std(temp)) 
+            # print(temp.shape)
+            # print(g.shape)
+            out[m-i, n-j] = (temp * (1/np.std(g)) * (g - np.mean(g))).sum()
+
 
     pass
     ### END YOUR CODE
