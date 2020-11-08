@@ -93,7 +93,8 @@ def conv_fast(image, kernel):
     ### YOUR CODE HERE
 
     # First, start by flipping the kernel (for convolution)
-    flipped_ker = np.fliplr(kernel)
+    temp_flipped_ker = np.fliplr(kernel)
+    flipped_ker = np.flipud(temp_flipped_ker)
 
     # Initializing some variables
     i = Hk//2
@@ -217,6 +218,8 @@ def normalized_cross_correlation(f, g):
     Returns:
         out: numpy array of shape (Hf, Wf).
     """
+
+    
 
     out = None
     ### YOUR CODE HERE
