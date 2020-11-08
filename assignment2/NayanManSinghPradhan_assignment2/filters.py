@@ -4,6 +4,7 @@ import numpy as np
 from scipy import signal
 from scipy import misc
 
+
 def conv_nested(image, kernel):
     """A naive implementation of convolution filter.
 
@@ -41,6 +42,7 @@ def conv_nested(image, kernel):
     ### END YOUR CODE
 
     return out
+
 
 def zero_pad(image, pad_height, pad_width):
     """ Zero-pad an image.
@@ -120,6 +122,8 @@ def conv_fast(image, kernel):
 
     return out
 
+
+# Bonus Function
 def conv_faster(image, kernel):
     """
     Args:
@@ -181,6 +185,7 @@ def cross_correlation(f, g):
 
     return out
 
+
 def zero_mean_cross_correlation(f, g):
     """ Zero-mean cross-correlation of f and g.
 
@@ -205,6 +210,7 @@ def zero_mean_cross_correlation(f, g):
     ### END YOUR CODE
 
     return out
+
 
 def normalized_cross_correlation(f, g):
     """ Normalized cross-correlation of f and g.
