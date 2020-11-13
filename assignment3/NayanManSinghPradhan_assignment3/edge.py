@@ -53,6 +53,12 @@ def gaussian_kernel(size, sigma):
 
     ### YOUR CODE HERE
     pass
+    k = (size - 1) / 2 # From relation i,j < 2k+1
+    for i in range (size):
+        for j in range(size):
+            # using given formula
+            kernel[i,j] = (1/(2 * np.pi * sigma**2)) * np.exp( -1* ( ((i-k)**2) + ((j-k)**2) )/(2*sigma**2) )
+    
     ### END YOUR CODE
 
     return kernel
