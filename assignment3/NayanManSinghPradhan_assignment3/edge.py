@@ -28,6 +28,13 @@ def conv(image, kernel):
 
     ### YOUR CODE HERE
     pass
+    # First flip the passed kernel for convolution
+    kernel = np.flipud(np.fliplr(kernel))
+    # Implementation of formula
+    for i in range(Hi):
+        for j in range(Wi):
+            out[i,j] = ((padded[i:i+Hk, j:j+Wk] * kernel).sum()).sum()
+
     ### END YOUR CODE
 
     return out
