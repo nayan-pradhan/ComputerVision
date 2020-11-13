@@ -95,7 +95,7 @@ def partial_x(img):
     out = conv(img, ker)
     
     ### END YOUR CODE
-    
+
     return out
 
 def partial_y(img):
@@ -146,6 +146,8 @@ def gradient(img):
 
     ### YOUR CODE HERE
     pass
+    G = np.sqrt((partial_x(img)**2) + (partial_y(img)**2))
+    theta = np.arctan2((partial_y(img)),(partial_x(img))) * 180 % np.pi 
     ### END YOUR CODE
 
     return G, theta
