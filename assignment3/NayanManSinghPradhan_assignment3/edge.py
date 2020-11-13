@@ -86,7 +86,13 @@ def partial_x(img):
 
     ### YOUR CODE HERE
     pass
-    ### END YOUR CODE
+
+    ker = np.array(
+        [[ 0, 0, 0],
+         [ 0.5, 0, -0.5],
+         [ 0, 0, 0]]
+)
+    out = conv(img, ker)
 
     return out
 
