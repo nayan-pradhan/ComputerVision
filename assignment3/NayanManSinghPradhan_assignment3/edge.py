@@ -87,13 +87,15 @@ def partial_x(img):
     ### YOUR CODE HERE
     pass
 
-    ker = np.array(
+    ker = np.array (
         [[ 0, 0, 0],
          [ 0.5, 0, -0.5],
          [ 0, 0, 0]]
-)
+    )
     out = conv(img, ker)
-
+    
+    ### END YOUR CODE
+    
     return out
 
 def partial_y(img):
@@ -112,6 +114,14 @@ def partial_y(img):
 
     ### YOUR CODE HERE
     pass
+
+    ker = I_y_test = np.array (
+        [[ 0, 0.5, 0],
+         [ 0, 0, 0],
+         [ 0, -0.5, 0]]
+    )
+    out = conv(img, ker)
+
     ### END YOUR CODE
 
     return out
