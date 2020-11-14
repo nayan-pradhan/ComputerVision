@@ -147,7 +147,8 @@ def gradient(img):
     ### YOUR CODE HERE
     pass
     G = np.sqrt((partial_x(img)**2) + (partial_y(img)**2))
-    theta = np.arctan2((partial_y(img)),(partial_x(img))) * 180 % np.pi 
+    theta = np.arctan2((partial_y(img)),(partial_x(img))) * 180/np.pi 
+    theta = theta%360 # to make it fit in specified range
     ### END YOUR CODE
 
     return G, theta
@@ -176,20 +177,20 @@ def non_maximum_suppression(G, theta):
     pass
     for i in range(H):
         for j in range(W):
-            ang = theta[i, j] % 180
+            ang = theta[i, j] % 360
 
-            if ang == 0:
+            if (ang == 0) or (ang == 180):
                 comp1 = G[i, j+1] if (j+1 < W) else 0
                 comp2 = G[i, j-1] if (j-1 > -1) else 0
-            elif ang == 45:
+            elif (ang == 45) or (ang == (45+180)):
                 comp1 = G[i+1, j+1] if (i+1 < H) and (j+1 < W) else 0
                 comp2 = G[i-1, j-1] if (i-1 > -1) and (j-1 > -1) else 0
-            elif ang == 90:
+            elif (ang == 90) or (ang == (90+180)):
                 comp1 = G[i+1, j] if (i+1 < H) else 0
                 comp2 = G[i-1, j] if (i-1 > -1) else 0
-            elif ang == 135:
+            elif (ang == 135) or (ang == (135+180)):
                 comp1 = G[i+1, j-1] if (i+1 < H) and (j-1 > -1) else 0
-                comp2 = G[i-1, j+1] if (i-1 > 0) and (j+1 < W) else 0
+                comp2 = G[i-1, j+1] if (i-1 > -1) and (j+1 < W) else 0
 
             if (G[i, j] >= comp1) and (G[i, j] >= comp2):
                 out[i, j] = G[i, j]
