@@ -174,6 +174,26 @@ def non_maximum_suppression(G, theta):
 
     ### BEGIN YOUR CODE
     pass
+    for i in range(H):
+        for j in range(W):
+            ang = theta[i, j] % 180
+
+            if ang == 0:
+                comp1 = G[i, j+1] if (j+1 < W) else 0
+                comp2 = G[i, j-1] if (j-1 > -1) else 0
+            elif ang == 45:
+                comp1 = G[i+1, j+1] if (i+1 < H) and (j+1 < W) else 0
+                comp2 = G[i-1, j-1] if (i-1 > -1) and (j-1 > -1) else 0
+            elif ang == 90:
+                comp1 = G[i+1, j] if (i+1 < H) else 0
+                comp2 = G[i-1, j] if (i-1 > -1) else 0
+            elif ang == 135:
+                comp1 = G[i+1, j-1] if (i+1 < H) and (j-1 > -1) else 0
+                comp2 = G[i-1, j+1] if (i-1 > 0) and (j+1 < W) else 0
+
+            if (G[i, j] >= comp1) and (G[i, j] >= comp2):
+                out[i, j] = G[i, j]
+
     ### END YOUR CODE
 
     return out
