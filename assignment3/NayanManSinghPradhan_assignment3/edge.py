@@ -364,7 +364,7 @@ def hough_transform(img):
     # Set rho and theta ranges
     W, H = img.shape
     diag_len = int(np.ceil(np.sqrt(W * W + H * H)))
-    rhos = np.linspace(-diag_len, diag_len, diag_len * 2.0 + 1)
+    rhos = np.linspace(-diag_len, diag_len, (diag_len * 2 + 1))
     thetas = np.deg2rad(np.arange(-90.0, 90.0))
 
     # Cache some reusable values
@@ -381,6 +381,14 @@ def hough_transform(img):
     # and increment the accumulator in the corresponding coordiate.
     ### YOUR CODE HERE
     pass
+
+    coordinates = zip(xs, ys)
+    for x, y in (coordinates):
+        for th in range(num_thetas):
+            rho = (x * cos_t[th]) + (y * sin_t[th]) 
+            acc_x = int(rho + diag_len)
+            accumulator[acc_x, th] += 1
+
     ### END YOUR CODE
 
     return accumulator, rhos, thetas
