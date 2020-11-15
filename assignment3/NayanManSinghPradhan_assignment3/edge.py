@@ -227,10 +227,11 @@ def double_thresholding(img, high, low):
         for j in range(img.shape[1]):
             if img[i,j] > high:
                 strong_edges[i,j] = 1
-            # elif img[i,j] <= high and img[i,j] > low:
-            #     weak_edges[i,j] = 1
-            else:
+            elif img[i,j] <= high and img[i,j] > low:
                 weak_edges[i,j] = 1
+            else:
+                pass
+
     ### END YOUR CODE
 
     return strong_edges, weak_edges
