@@ -289,8 +289,18 @@ def link_edges(strong_edges, weak_edges):
     weak_edges = np.copy(weak_edges)
     edges = np.copy(strong_edges)
 
+    # indices is giving the coordinates of the strong edges
+    # print(indices)
+
     ### YOUR CODE HERE
     pass
+    for strong_edges_i in indices: # iterate through strong edges
+        edges[strong_edges_i[0]][strong_edges_i[1]] = 1 # setting strong edges to 1
+        neighbour = get_neighbors(strong_edges_i[1], strong_edges_i[0], H, W) # getting neighbours
+        for neighbour_i in neighbour: # iterate through neighbours of strong edges
+            if (weak_edges[neighbour_i[0]][neighbour_i[1]] == 1): # if neighbour of strong edge is a weak
+                edges[neighbour_i[0]][neighbour_i[1]] = 1 # set neighbour as edge
+
     ### END YOUR CODE
 
     return edges
