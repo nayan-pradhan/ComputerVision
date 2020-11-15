@@ -320,6 +320,27 @@ def canny(img, kernel_size=5, sigma=1.4, high=20, low=15):
     """
     ### YOUR CODE HERE
     pass
+
+    # 1. making the image smooth
+    kernel = gaussian_kernel(kernel_size, sigma)
+    smoothed = conv(img, kernel)
+
+    # 2. Finding x and y gradient
+    Gx = partial_x(smoothed)
+    Gy = partial_y(smoothed)
+
+    # 3. Magnitude of gradient
+    G, theta = gradient(smoothed)
+
+    # 4. Non-maximum suppression
+    non_max_suppressed_img = non_maximum_suppression(G, theta)
+
+    # 5. Double thresholding
+    strong, weak = double_thresholding(non_max_suppressed_img, high, low)
+
+    # 6. Edge detection
+    edge = link_edges(strong, weak)
+
     ### END YOUR CODE
 
     return edge
