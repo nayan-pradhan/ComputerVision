@@ -1,3 +1,5 @@
+# Done By: Nayan Man Singh Pradhan
+
 import numpy as np
 
 def conv(image, kernel):
@@ -328,17 +330,15 @@ def canny(img, kernel_size=5, sigma=1.4, high=20, low=15):
     # 2. Finding x and y gradient
     Gx = partial_x(smoothed)
     Gy = partial_y(smoothed)
-
-    # 3. Magnitude of gradient
     G, theta = gradient(smoothed)
 
-    # 4. Non-maximum suppression
+    # 3. Non-maximum suppression
     non_max_suppressed_img = non_maximum_suppression(G, theta)
 
-    # 5. Double thresholding
+    # 4. Double thresholding
     strong, weak = double_thresholding(non_max_suppressed_img, high, low)
 
-    # 6. Edge detection
+    # 5. Edge detection
     edge = link_edges(strong, weak)
 
     ### END YOUR CODE
@@ -379,6 +379,7 @@ def hough_transform(img):
     # Transform each point (x, y) in image
     # Find rho corresponding to values in thetas
     # and increment the accumulator in the corresponding coordiate.
+    
     ### YOUR CODE HERE
     pass
 
