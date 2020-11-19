@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.fromnumeric import trace
 from skimage import filters
 from skimage.feature import corner_peaks
 from skimage.util.shape import view_as_blocks
@@ -31,11 +32,25 @@ def harris_corners(img, window_size=3, k=0.04):
 
     response = np.zeros((H, W))
 
+    # x and y derivatives
     dx = filters.sobel_v(img)
     dy = filters.sobel_h(img)
 
     ### YOUR CODE HERE
     pass
+
+    # compute products of derivatives
+    Ix2 = convolve(dx*dx, window, mode = 'constant')
+    IxIy = convolve(dx*dy, window, mode = 'constant')
+    Iy2 = convolve(dy*dy, window, mode = 'constant')
+    
+    # determinant of M and trace of M
+    det_M = (Ix2 * Iy2) - (IxIy ** 2)
+    trace_M = Ix2+Iy2
+
+    # compute response
+    R = det_M - k*(trace_M**2)
+    response = R
     ### END YOUR CODE
 
     return response
