@@ -77,6 +77,12 @@ def simple_descriptor(patch):
     feature = []
     ### YOUR CODE HERE
     pass
+    mean = patch.mean() # mean of image
+    sigma = patch.std() # standard deviation of image
+    if sigma == 0: # if sigma is 0
+        sigma = 1 # set sigma to 1 (because we divide with sigma while normalizing)
+    normalized_img = (patch - mean)/sigma # normalizing formula
+    feature = normalized_img.reshape(-1) # flattening result to 1D array
     ### END YOUR CODE
     return feature
 
