@@ -169,6 +169,7 @@ def fit_affine_matrix(p1, p2):
 
     ### YOUR CODE HERE
     pass
+    H = np.linalg.lstsq(p2, p1)[0] # implementing the formula using reference documentation
     ### END YOUR CODE
 
     # Sometimes numerical issues cause least-squares to produce the last
