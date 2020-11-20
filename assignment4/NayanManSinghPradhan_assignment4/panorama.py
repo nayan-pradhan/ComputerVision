@@ -38,16 +38,13 @@ def harris_corners(img, window_size=3, k=0.04):
 
     ### YOUR CODE HERE
     pass
-
     # compute products of derivatives
     Ix2 = convolve(dx*dx, window, mode = 'constant')
     IxIy = convolve(dx*dy, window, mode = 'constant')
     Iy2 = convolve(dy*dy, window, mode = 'constant')
-    
     # determinant of M and trace of M
     det_M = (Ix2 * Iy2) - (IxIy ** 2)
     trace_M = Ix2+Iy2
-
     # compute response
     R = det_M - k*(trace_M**2)
     response = R
@@ -75,6 +72,7 @@ def simple_descriptor(patch):
         feature: 1D array of shape (H * W)
     """
     feature = []
+
     ### YOUR CODE HERE
     pass
     mean = patch.mean() # mean of image
@@ -84,6 +82,7 @@ def simple_descriptor(patch):
     normalized_img = (patch - mean)/sigma # normalizing formula
     feature = normalized_img.reshape(-1) # flattening result to 1D array
     ### END YOUR CODE
+
     return feature
 
 
@@ -133,9 +132,17 @@ def match_descriptors(desc1, desc2, threshold=0.5):
 
     N = desc1.shape[0]
     dists = cdist(desc1, desc2)
-
+    # print(dists)
     ### YOUR CODE HERE
     pass
+    for i, kp in enumerate(dists):
+        sorted_distance = np.sort(kp) # sort elements based on lowest distance to largest distance
+        # print(sorted_distance)
+        # print('---------')
+        if ((sorted_distance[0]/sorted_distance[1]) < threshold): 
+            # if ratio of distances between closest and second closest vector is smaller than given threshold
+            matches.append([i, np.argmin(kp)]) # add matches as pair of vector indices
+    matches = np.asarray(matches) # change to array
     ### END YOUR CODE
 
     return matches
