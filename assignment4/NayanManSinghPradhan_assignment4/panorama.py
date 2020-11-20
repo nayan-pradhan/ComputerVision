@@ -211,12 +211,19 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     matched1 = pad(keypoints1[matches[:,0]])
     matched2 = pad(keypoints2[matches[:,1]])
 
+    # print(matches)
+    # print('xxxx')
+    # print(matched1)
+    # print('----')
+    # print(matched2)
+
     max_inliers = np.zeros(N)
     n_inliers = 0
 
     # RANSAC iteration start
     ### YOUR CODE HERE
     pass
+    
     ### END YOUR CODE
     print(H)
     return H, orig_matches[max_inliers]
