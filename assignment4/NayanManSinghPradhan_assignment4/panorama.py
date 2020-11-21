@@ -1,4 +1,5 @@
 import numpy as np
+from numpy.core.defchararray import count
 from numpy.core.fromnumeric import trace
 from skimage import filters
 from skimage.feature import corner_peaks
@@ -223,17 +224,38 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     # RANSAC iteration start
     ### YOUR CODE HERE
     pass
+    max_inliers = list()
+    max_c = 0
     for k in range(n_iters):
         ## selecting random points
         n = np.random.choice(N, n_samples, replace = False)
         # print('n=',n)
         mat_1 = matched1[n]
         mat_2 = matched2[n]
-        ## computing the least square distance
-        H = np.linalg.lstsq(mat_2, mat_1, rcond = None)[0]
-        print('H1=', H)
-        H[:,2] = np.array([0,0,1]) # eliminating extra dimension
-        print('H2=', H)
+        H = np.linalg.lstsq(mat_2, mat_1)[0]
+        for d in range(np.shape(H)[0]):
+            if (d == np.shape(H)[0] - 1):
+                H[d,-1] = 1
+            else:
+                H[d,-1] = 0
+        current_inliners = list()
+        n_matches = np.shape(matches)[0]
+        c = 0 # counter
+        for l in range(n_matches):
+            d = np.abs(np.linalg.norm(matched2[l].dot(H)) - np.linalg.norm(matched1[l]))
+            if (d < threshold):
+                current_inliners.append(l)
+                c = c+1
+        if (max_c < c):
+            max_c = count
+            max_inliers = current_inliners
+    H = np.linalg.lstsq(matched2[max_inliers], matched1[max_inliers])[0];
+    for f in range (np.shape(H)[0]):
+        if (f == np.shape(H)[0]-1):
+            H[f,-1] = -1
+        else:
+            H[f,-1] = 0
+
     ### END YOUR CODE
     print(H)
     return H, orig_matches[max_inliers]
