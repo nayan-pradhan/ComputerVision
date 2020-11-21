@@ -223,7 +223,17 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     # RANSAC iteration start
     ### YOUR CODE HERE
     pass
-    
+    for k in range(n_iters):
+        ## selecting random points
+        n = np.random.choice(N, n_samples, replace = False)
+        # print('n=',n)
+        mat_1 = matched1[n]
+        mat_2 = matched2[n]
+        ## computing the least square distance
+        H = np.linalg.lstsq(mat_2, mat_1, rcond = None)[0]
+        print('H1=', H)
+        H[:,2] = np.array([0,0,1]) # eliminating extra dimension
+        print('H2=', H)
     ### END YOUR CODE
     print(H)
     return H, orig_matches[max_inliers]
