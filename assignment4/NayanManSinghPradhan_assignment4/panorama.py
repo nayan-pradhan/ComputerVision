@@ -136,12 +136,17 @@ def match_descriptors(desc1, desc2, threshold=0.5):
     # print(desc1.shape)
     # print(desc2.shape)
     # print(dists.shape)
+    
     ### YOUR CODE HERE
     pass
-    for i, kp in enumerate(dists):
+    for i, kp in enumerate(dists): # enumerate used for counter i
+        # if i == 1:
+        #     print(kp[1:20])
+        #     print(kp[1]==dists[1][1])
         sorted_distance = np.sort(kp) # sort elements based on lowest distance to largest distance
-        # print(sorted_distance)
-        # print('---------')
+        # if i == 1:
+        #     print('---------')
+        #     print(sorted_distance[1:20])
         if ((sorted_distance[0]/sorted_distance[1]) < threshold): 
             # if ratio of distances between closest and second closest vector is smaller than given threshold
             matches.append([i, np.argmin(kp)]) # add matches as pair of vector indices
@@ -224,6 +229,7 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     n_inliers = 0
 
     # RANSAC iteration start
+    
     ### YOUR CODE HERE
 
     pass
@@ -233,7 +239,7 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
         # print('n=',n)
         mat_1 = matched1[n]
         mat_2 = matched2[n]
-        ## computing the least square distance
+        ## computing affine transform matrix 
         H = np.linalg.lstsq(mat_2, mat_1, rcond = None)[0]
         # print('H1=', H)
         H[:,2] = np.array([0,0,1]) # eliminating extra dimension
@@ -248,6 +254,7 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     H[:,2] = np.array([0, 0, 1])
 
     ### END YOUR CODE
+    
     print(H)
     return H, orig_matches[max_inliers]
 
