@@ -133,7 +133,9 @@ def match_descriptors(desc1, desc2, threshold=0.5):
 
     N = desc1.shape[0]
     dists = cdist(desc1, desc2)
-    # print(dists)
+    # print(desc1.shape)
+    # print(desc2.shape)
+    # print(dists.shape)
     ### YOUR CODE HERE
     pass
     for i, kp in enumerate(dists):
