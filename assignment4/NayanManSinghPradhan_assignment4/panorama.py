@@ -1,3 +1,5 @@
+# Done By: Nayan Man Singh Pradhan
+
 import numpy as np
 from numpy.core.defchararray import count
 from numpy.core.fromnumeric import trace
@@ -177,7 +179,7 @@ def fit_affine_matrix(p1, p2):
 
     ### YOUR CODE HERE
     pass
-    H = np.linalg.lstsq(p2, p1)[0] # implementing the formula using reference documentation
+    H = np.linalg.lstsq(p2, p1, rcond = None)[0] # implementing the formula using reference documentation
     ### END YOUR CODE
 
     # Sometimes numerical issues cause least-squares to produce the last
@@ -231,7 +233,6 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     # RANSAC iteration start
     
     ### YOUR CODE HERE
-
     pass
     for idx in range(n_iters):
         ## selecting random points
@@ -252,7 +253,6 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
         
     H = np.linalg.lstsq(matched2[max_inliers], matched1[max_inliers], rcond = None)[0]
     H[:,2] = np.array([0, 0, 1])
-
     ### END YOUR CODE
 
     print(H)
@@ -314,9 +314,9 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
             col_2 = temp_G.shape[1]
             for m in range(row_2):
                 for n in range(col_2):
-                    low_bin = int((temp_theta[i, j] // degrees_per_bin) % n_bins)
-                    cells[i, j, low_bin] += temp_G[i,j]
-            cells[i, j] = cells[i, j]/np.sum(cells[i, j]
+                    low_bin = int((temp_theta[m, n] // degrees_per_bin) % n_bins)
+                    cells[i, j, low_bin] += temp_G[m,n]
+            cells[i, j, :] = cells[i, j, :]/np.sum(cells[i, j, :])
     block = cells.flatten()
     ### END YOUR CODE
 
