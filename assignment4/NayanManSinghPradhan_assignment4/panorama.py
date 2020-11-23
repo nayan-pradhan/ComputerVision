@@ -254,7 +254,7 @@ def ransac(keypoints1, keypoints2, matches, n_iters=200, threshold=20):
     H[:,2] = np.array([0, 0, 1])
 
     ### END YOUR CODE
-    
+
     print(H)
     return H, orig_matches[max_inliers]
 
@@ -296,6 +296,7 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
     #   G_cells.shape = theta_cells.shape = (H//M, W//N)
     #   G_cells[0, 0].shape = theta_cells[0, 0].shape = (M, N)
     G_cells = view_as_blocks(G, block_shape=pixels_per_cell)
+    print(G_cells)
     theta_cells = view_as_blocks(theta, block_shape=pixels_per_cell)
     rows = G_cells.shape[0]
     cols = G_cells.shape[1]
@@ -306,6 +307,9 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
     # Compute histogram per cell
     ### YOUR CODE HERE
     pass
+    for i in range(rows):
+        for j in range(cols):
+            
     ### YOUR CODE HERE
 
     return block
