@@ -287,7 +287,6 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
 
     Gx = filters.sobel_v(patch)
     Gy = filters.sobel_h(patch)
-
     # Unsigned gradients
     G = np.sqrt(Gx**2 + Gy**2)
     theta = (np.arctan2(Gy, Gx) * 180 / np.pi) % 180
@@ -296,7 +295,6 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
     #   G_cells.shape = theta_cells.shape = (H//M, W//N)
     #   G_cells[0, 0].shape = theta_cells[0, 0].shape = (M, N)
     G_cells = view_as_blocks(G, block_shape=pixels_per_cell)
-    print(G_cells)
     theta_cells = view_as_blocks(theta, block_shape=pixels_per_cell)
     rows = G_cells.shape[0]
     cols = G_cells.shape[1]
@@ -305,12 +303,22 @@ def hog_descriptor(patch, pixels_per_cell=(8,8)):
     cells = np.zeros((rows, cols, n_bins))
 
     # Compute histogram per cell
+
     ### YOUR CODE HERE
     pass
     for i in range(rows):
         for j in range(cols):
-            
-    ### YOUR CODE HERE
+            temp_G = G_cells[i, j]
+            temp_theta = theta_cells[i, j]
+            row_2 = temp_G.shape[0]
+            col_2 = temp_G.shape[1]
+            for m in range(row_2):
+                for n in range(col_2):
+                    low_bin = int((temp_theta[i, j] // degrees_per_bin) % n_bins)
+                    cells[i, j, low_bin] += temp_G[i,j]
+            cells[i, j] = cells[i, j]/np.sum(cells[i, j]
+    block = cells.flatten()
+    ### END YOUR CODE
 
     return block
 
