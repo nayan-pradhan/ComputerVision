@@ -34,9 +34,23 @@ def kmeans(features, k, num_iters=100):
     centers = features[idxs]
     assignments = np.zeros(N)
 
+    prev_assignments = assignments.copy()
     for n in range(num_iters):
         ### YOUR CODE HERE
         pass
+        for i, f in enumerate(features):
+            assignments[i] = np.argmin([np.linalg.norm(f-x) for x in centers])
+
+        # Updating centers
+        for j in range(k):
+            points = [features[x] for x in range(k) if assignments[x] == j]
+            if (len(points) != 0):
+                centers[j] = np.mean(points, axis=0)
+        
+        # check if two arrays are equal or not before next iteration
+        if np.array_equal(assignments, prev_assignments):
+            break
+        prev_assignments = assignments.copy
         ### END YOUR CODE
 
     return assignments
@@ -70,9 +84,24 @@ def kmeans_fast(features, k, num_iters=100):
     centers = features[idxs]
     assignments = np.zeros(N)
 
+    prev_assignments = assignments.copy()
     for n in range(num_iters):
         ### YOUR CODE HERE
         pass
+        for i, f in enumerate(features):
+            assignments[i] = np.argmin([np.linalg.norm(f-x) for x in centers])
+
+        # Updating Centers
+        for j in range(k):
+            points = [features[x] for x in range(k) if assignments[x] == j]
+            if len(points) != 0:
+                centers[j] = np.mean(points, axis=0)
+        
+        # check if two arrays are equal or not before next iteration
+        if np.array_equal(prev_assignments, assignments):
+            break
+        
+        prev_assignments = assignments.copy()
         ### END YOUR CODE
 
     return assignments
