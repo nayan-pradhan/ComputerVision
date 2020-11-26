@@ -50,8 +50,8 @@ def kmeans(features, k, num_iters=100):
         # check if two arrays are equal or not before next iteration
         if np.array_equal(assignments, prev_assignments):
             break
-            
-        prev_assignments = assignments.copy()
+
+        prev_assignments = assignments.copy
         ### END YOUR CODE
 
     return assignments
