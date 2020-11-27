@@ -229,6 +229,13 @@ def color_position_features(img):
 
     ### YOUR CODE HERE
     pass
+    x, y = np.mgrid[0:H,0:W]
+    index = np.dstack((x,y))
+    index_min = np.min(index)
+    index_max = np.max(index)
+    index = (index - index_min)/(index_max - index_min)
+    temp = np.dstack((color,index))
+    features = temp.reshape((H*W, C+2))
     ### END YOUR CODE
 
     return features
@@ -269,6 +276,15 @@ def compute_accuracy(mask_gt, mask):
     accuracy = None
     ### YOUR CODE HERE
     pass
+    H, W = mask.shape
+    count = 0
+    # for pixel wise
+    for i in range(H):
+        for j in range(W):
+            if (mask[i, j] == mask_gt[i, j]):
+                count += 1
+    den = H*W    
+    accuracy = count/den
     ### END YOUR CODE
 
     return accuracy
