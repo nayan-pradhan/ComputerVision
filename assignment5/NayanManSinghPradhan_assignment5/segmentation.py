@@ -35,6 +35,7 @@ def kmeans(features, k, num_iters=100):
     assignments = np.zeros(N)
 
     prev_assignments = assignments.copy()
+    
     for n in range(num_iters):
         ### YOUR CODE HERE
         pass
