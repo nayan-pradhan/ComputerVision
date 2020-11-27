@@ -148,8 +148,6 @@ def hierarchical_clustering(features, k):
             (e.g. i-th point is assigned to cluster assignments[i])
     """
 
-
-
     N, D = features.shape
 
     assert N >= k, 'Number of clusters cannot be greater than number of points'
@@ -162,8 +160,26 @@ def hierarchical_clustering(features, k):
     while n_clusters > k:
         ### YOUR CODE HERE
         pass
+        min_distance = np.linalg.norm(centers[0] - centers[1])
+        distance_1 = 0
+        distance_2 = 1
+        for i in range(n_clusters - 1):
+            for j in range(i+1, n_clusters):
+                distance = np.linalg.norm(centers[i] - centers[j])
+                if distance < min_distance:
+                    min_distance = distance
+                    distance_1 = i 
+                    distance_2 = j
+        centers[distance_1] = (centers[distance_1] + centers[distance_2]) / 2
+        centers = np.delete(centers,distance_2, 0)
+        for i in range(N):
+            if (assignments[i] > distance_2 - 1):
+                if (assignments[i] == distance_2):
+                    assignments[i] = distance_1
+                else:
+                    assignments[i] -= 1
+        n_clusters -= 1
         ### END YOUR CODE
-
     return assignments
 
 
