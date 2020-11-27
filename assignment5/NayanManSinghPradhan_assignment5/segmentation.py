@@ -199,6 +199,7 @@ def color_features(img):
 
     ### YOUR CODE HERE
     pass
+    features = img.reshape((H*W), C)
     ### END YOUR CODE
 
     return features
