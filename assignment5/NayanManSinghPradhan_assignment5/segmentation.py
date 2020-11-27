@@ -38,17 +38,20 @@ def kmeans(features, k, num_iters=100):
     for n in range(num_iters):
         ### YOUR CODE HERE
         pass
+
+        # assigning the feature points with the closest center
         for i, f in enumerate(features):
             assignments[i] = np.argmin([np.linalg.norm(f-x) for x in centers])
 
-        # Updating centers
+        # updating centers by taking mean
         for j in range(k):
-            points = [features[x] for x in range(k) if assignments[x] == j]
+            points = [features[x] for x in range(k) if assignments[x] == j] # points for specific center
             if (len(points) != 0):
                 centers[j] = np.mean(points, axis=0)
         
         # check if two arrays are equal or not before next iteration
         if np.array_equal(assignments, prev_assignments):
+            # if equal, end loop
             break
 
         prev_assignments = assignments.copy
@@ -89,17 +92,20 @@ def kmeans_fast(features, k, num_iters=100):
     for n in range(num_iters):
         ### YOUR CODE HERE
         pass
+
+        # assigning the feature points with the closest center
         for i, f in enumerate(features):
             assignments[i] = np.argmin([np.linalg.norm(f-x) for x in centers])
 
-        # Updating Centers
+        # updating centers by taking mean
         for j in range(k):
-            points = [features[x] for x in range(k) if assignments[x] == j]
+            points = [features[x] for x in range(k) if assignments[x] == j] # points for specific center
             if len(points) != 0:
                 centers[j] = np.mean(points, axis=0)
         
         # check if two arrays are equal or not before next iteration
         if np.array_equal(prev_assignments, assignments):
+            # if equal, end loop
             break
         
         prev_assignments = assignments.copy()
