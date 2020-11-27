@@ -12,6 +12,7 @@ def visualize_mean_color_image(img, segments):
 
     img = img_as_float(img)
     k = np.max(segments) + 1
+    k = int(k)
     mean_color_img = np.zeros(img.shape)
 
     for i in range(k):
