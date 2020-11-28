@@ -284,7 +284,7 @@ def compute_accuracy(mask_gt, mask):
             if (mask[i, j] == mask_gt[i, j]):
                 count += 1
     den = H*W    
-    accuracy = count/den
+    accuracy = count/den 
     ### END YOUR CODE
 
     return accuracy
