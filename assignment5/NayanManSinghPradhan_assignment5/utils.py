@@ -80,7 +80,7 @@ def load_dataset(data_dir):
     masks for images in 'imgs' dir. The segmentation mask for image
     'imgs/aaa.jpg' is 'gt/aaa.png'
     """
-
+  
     imgs = []
     gt_masks = []
 
